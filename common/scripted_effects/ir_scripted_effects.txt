@@ -1,0 +1,32 @@
+ir_assign_recipient_title_id = {
+	save_event_target_as = ir_recipient_title
+	any_title = {
+		if = {
+			limit = {
+				check_variable = { which = ir_recipient_title_id which = event_target:ir_recipient_title }
+			}
+			log = "Found [This.GetName].ir_recipient_title_id [This.ir_recipient_title_id.GetValue]"
+			event_target:ir_recipient_title = {
+				set_variable = { which = ir_recipient_title_id which = PREV }
+			}
+		}
+	}
+	change_variable = { which = ir_recipient_title_id value = 1 }
+	log = "Set [This.GetName].ir_recipient_title_id to [This.ir_recipient_title_id.GetValue]"
+}
+
+ir_deduct_county_transfer_cost = {
+	prestige = -100
+	piety = -100
+	wealth = -50
+}
+ir_deduct_duchy_transfer_cost = {
+	prestige = -200
+	piety = -200
+	wealth = -100
+}
+ir_deduct_kingdom_transfer_cost = {
+	prestige = -400
+	piety = -400
+	wealth = -200
+}

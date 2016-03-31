@@ -1,0 +1,346 @@
+title_decisions = {
+	ir_designate_recipient_title = {
+		filter = realm_owned
+		ai_target_filter = primary_title
+
+		from_potential = {
+			ai = no
+		}
+
+		potential = {
+			OR = {
+				real_tier = DUKE
+				real_tier = KING
+				real_tier = EMPEROR
+			}
+
+			# Technical limitation, you can't assign to a title
+			# without a holder, because it is not part of the
+			# any_realm_title scope, and use of any_title in the
+			# trigger instead causes CK2 to crash.
+			has_holder = yes
+
+			ir_title_controlled = yes
+		}
+
+		allow = {
+			custom_tooltip = {
+				text = ir_ttip_is_current_designate
+				hidden_tooltip = {
+					# Either no recipient ID set, or it is
+					# set on title and FROM either doesn't
+					# have a flag, or does and has different ID.
+					OR = {
+						NOT = { check_variable = { which = ir_recipient_title_id value = 1 } }
+						NOT = { is_variable_equal = { which = ir_recipient_title_id which = FROM } }
+					}
+				}
+			}
+			FROM = {
+				is_adult = yes
+				prisoner = no
+				NOT = { trait = incapable }
+			}
+		}
+
+		effect = {
+			ROOT = {
+				custom_tooltip = {
+					text = ir_ttip_this_is_designated_title
+					hidden_tooltip = {
+						if = {
+							limit = { NOT = { check_variable = { which = ir_recipient_title_id value = 1 } } }
+							ir_assign_recipient_title_id = yes
+						}
+						FROM = {
+							set_variable = { which = ir_recipient_title_id which = ROOT }
+						}
+					}
+				}
+			}
+		}
+		revoke_allowed = {
+			always = no
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+
+	ir_transfer_county_to_recipient_duchy = {
+		filter = realm_owned
+		ai_target_filter = primary_title
+
+		from_potential = {
+			ai = no
+			higher_real_tier_than = COUNT
+			is_playable = yes
+		}
+
+		potential = {
+			real_tier = COUNT
+			ir_title_potential_transfer = yes
+		}
+
+		allow = {
+			FROM = {
+				custom_tooltip = {
+					text = ir_ttip_one_is_designated
+					hidden_tooltip = {
+						check_variable = { which = ir_recipient_title_id value = 1 }
+						any_realm_title = {
+							AND = {
+								real_tier = DUKE
+								ir_is_recipient_not_dejure = yes
+							}
+						}
+					}
+				}
+
+				is_adult = yes
+				prisoner = no
+				NOT = { trait = incapable }
+
+				ir_has_county_transfer_cost = yes
+			}
+			custom_tooltip = {
+				text = ir_ttip_control_the_current_dejure_duchy
+				hidden_tooltip = {
+					ir_title_controlled = yes
+					ir_legally_controls_county = yes
+				}
+			}
+		}
+
+		effect = {
+			FROM = {
+				# Apply tyranny
+				if = {
+					limit = {
+						ROOT = {
+							duchy = {
+								AND = {
+									has_holder = yes
+									NOT = {
+										holder_scope = {
+											character = FROM
+										}
+									}
+								}
+							}
+						}
+					}
+					ROOT = {
+						duchy = {
+							holder_scope = {
+								opinion = {
+									modifier = opinion_tyrant
+									who = FROM
+								}
+							}
+						}
+					}
+				}
+
+				any_title_under = {
+					limit = {
+						check_variable = { which = ir_recipient_title_id value = 1 }
+						is_variable_equal = { which = ir_recipient_title_id which = FROM }
+					}
+					custom_tooltip = {
+						text = ir_ttip_transfer
+						hidden_tooltip = {
+							ROOT = {
+								de_jure_liege = PREV
+							}
+						}
+					}
+				}
+
+				ir_deduct_county_transfer_cost = yes
+			}
+		}
+		revoke_allowed = {
+			always = no
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+
+	ir_transfer_duchy_to_recipient_kingdom = {
+		filter = realm_owned
+		ai_target_filter = primary_title
+
+		from_potential = {
+			ai = no
+			higher_real_tier_than = DUKE
+			is_playable = yes
+		}
+
+		potential = {
+			real_tier = DUKE
+		}
+
+		allow = {
+			ir_title_potential_transfer = yes
+			FROM = {
+				custom_tooltip = {
+					text = ir_ttip_one_is_designated
+					hidden_tooltip = {
+						check_variable = { which = ir_recipient_title_id value = 1 }
+						any_realm_title = {
+							AND = {
+								real_tier = KING
+								ir_is_recipient_not_dejure = yes
+							}
+						}
+					}
+				}
+
+				is_adult = yes
+				prisoner = no
+				NOT = { trait = incapable }
+
+				ir_has_duchy_transfer_cost = yes
+			}
+			custom_tooltip = {
+				text = ir_ttip_control_the_current_dejure_duchy
+				hidden_tooltip = {
+					ir_title_controlled = yes
+					ir_legally_controls_duchy = yes
+				}
+			}
+		}
+
+		effect = {
+			FROM = {
+				# Apply tyranny
+				if = {
+					limit = {
+						ROOT = {
+							kingdom = {
+								AND = {
+									has_holder = yes
+									NOT = {
+										holder_scope = {
+											character = FROM
+										}
+									}
+								}
+							}
+						}
+					}
+					ROOT = {
+						kingdom = {
+							holder_scope = {
+								opinion = {
+									modifier = opinion_tyrant
+									who = FROM
+								}
+							}
+						}
+					}
+				}
+
+				any_title_under = {
+					limit = {
+						check_variable = { which = ir_recipient_title_id value = 1 }
+						is_variable_equal = { which = ir_recipient_title_id which = FROM }
+					}
+					custom_tooltip = {
+						text = ir_ttip_transfer
+						hidden_tooltip = {
+							ROOT = {
+								de_jure_liege = PREV
+							}
+						}
+					}
+				}
+
+				ir_deduct_duchy_transfer_cost = yes
+			}
+		}
+		revoke_allowed = {
+			always = no
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+
+	ir_transfer_kingdom_to_recipient_empire = {
+		filter = realm_owned
+		ai_target_filter = primary_title
+
+		from_potential = {
+			ai = no
+			higher_real_tier_than = KING
+			is_playable = yes
+		}
+
+		potential = {
+			real_tier = KING
+			ir_title_potential_transfer = yes
+		}
+
+		allow = {
+			FROM = {
+				custom_tooltip = {
+					text = ir_ttip_one_is_designated
+					hidden_tooltip = {
+						check_variable = { which = ir_recipient_title_id value = 1 }
+						any_realm_title = {
+							AND = {
+								real_tier = EMPEROR
+								ir_is_recipient_not_dejure = yes
+							}
+						}
+					}
+				}
+
+				is_adult = yes
+				prisoner = no
+				NOT = { trait = incapable }
+
+				ir_has_kingdom_transfer_cost = yes
+
+			}
+			custom_tooltip = {
+				text = ir_ttip_control_the_current_dejure_empire
+				hidden_tooltip = {
+					ir_title_controlled = yes
+					ir_legally_controls_kingdom = yes
+				}
+			}
+		}
+	
+		effect = {
+			FROM = {
+				any_title_under = {
+					limit = {
+						check_variable = { which = ir_recipient_title_id value = 1 }
+						is_variable_equal = { which = ir_recipient_title_id which = FROM }
+					}
+					custom_tooltip = {
+						text = ir_ttip_transfer
+						hidden_tooltip = {
+							ROOT = {
+								de_jure_liege = PREV
+							}
+						}
+					}
+				}
+
+				ir_deduct_kingdom_transfer_cost = yes
+			}
+		}
+		revoke_allowed = {
+			always = no
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+
+}
