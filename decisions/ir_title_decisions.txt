@@ -84,6 +84,8 @@ title_decisions = {
 
 		allow = {
 			FROM = {
+				completely_controls = ROOT
+
 				custom_tooltip = {
 					text = ir_ttip_one_is_designated
 					hidden_tooltip = {
@@ -185,6 +187,8 @@ title_decisions = {
 		allow = {
 			ir_title_potential_transfer = yes
 			FROM = {
+				completely_controls = ROOT
+
 				custom_tooltip = {
 					text = ir_ttip_one_is_designated
 					hidden_tooltip = {
@@ -286,6 +290,8 @@ title_decisions = {
 
 		allow = {
 			FROM = {
+				completely_controls = ROOT
+
 				custom_tooltip = {
 					text = ir_ttip_one_is_designated
 					hidden_tooltip = {
