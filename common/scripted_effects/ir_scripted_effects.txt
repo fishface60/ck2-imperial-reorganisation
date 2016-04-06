@@ -5,14 +5,14 @@ ir_assign_recipient_title_id = {
 			limit = {
 				check_variable = { which = ir_recipient_title_id which = event_target:ir_recipient_title }
 			}
-			log = "Found [This.GetName].ir_recipient_title_id [This.ir_recipient_title_id.GetValue]"
+			#log = "Found [This.GetName].ir_recipient_title_id [This.ir_recipient_title_id.GetValue]"
 			event_target:ir_recipient_title = {
 				set_variable = { which = ir_recipient_title_id which = PREV }
 			}
 		}
 	}
 	change_variable = { which = ir_recipient_title_id value = 1 }
-	log = "Set [This.GetName].ir_recipient_title_id to [This.ir_recipient_title_id.GetValue]"
+	#log = "Set [This.GetName].ir_recipient_title_id to [This.ir_recipient_title_id.GetValue]"
 }
 
 ir_deduct_county_transfer_cost = {

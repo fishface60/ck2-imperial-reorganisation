@@ -1,10 +1,13 @@
 title_decisions = {
 	ir_designate_recipient_title = {
-		filter = realm_owned
+		filter = sub_realm_owned
+		#ai_target_filter = sub_realm_owned
 		ai_target_filter = primary_title
 
 		from_potential = {
 			ai = no
+			higher_real_tier_than = COUNT
+			is_playable = yes
 		}
 
 		potential = {
@@ -25,7 +28,7 @@ title_decisions = {
 
 		allow = {
 			custom_tooltip = {
-				text = ir_ttip_is_current_designate
+				text = ir_ttip_not_current_designate
 				hidden_tooltip = {
 					# Either no recipient ID set, or it is
 					# set on title and FROM either doesn't
@@ -46,7 +49,7 @@ title_decisions = {
 		effect = {
 			ROOT = {
 				custom_tooltip = {
-					text = ir_ttip_this_is_designated_title
+					text = ir_ttip_set_designated_title
 					hidden_tooltip = {
 						if = {
 							limit = { NOT = { check_variable = { which = ir_recipient_title_id value = 1 } } }
@@ -68,7 +71,8 @@ title_decisions = {
 	}
 
 	ir_transfer_county_to_recipient_duchy = {
-		filter = realm_owned
+		filter = sub_realm_owned
+		#ai_target_filter = sub_realm_owned
 		ai_target_filter = primary_title
 
 		from_potential = {
@@ -79,15 +83,15 @@ title_decisions = {
 
 		potential = {
 			real_tier = COUNT
-			ir_title_potential_transfer = yes
 		}
 
 		allow = {
+			ir_title_potential_transfer = yes
 			FROM = {
 				completely_controls = ROOT
 
 				custom_tooltip = {
-					text = ir_ttip_one_is_designated
+					text = ir_ttip_designated_in_realm
 					hidden_tooltip = {
 						check_variable = { which = ir_recipient_title_id value = 1 }
 						any_realm_title = {
@@ -149,13 +153,8 @@ title_decisions = {
 						check_variable = { which = ir_recipient_title_id value = 1 }
 						is_variable_equal = { which = ir_recipient_title_id which = FROM }
 					}
-					custom_tooltip = {
-						text = ir_ttip_transfer
-						hidden_tooltip = {
-							ROOT = {
-								de_jure_liege = PREV
-							}
-						}
+					ROOT = {
+						de_jure_liege = PREV
 					}
 				}
 
@@ -171,7 +170,8 @@ title_decisions = {
 	}
 
 	ir_transfer_duchy_to_recipient_kingdom = {
-		filter = realm_owned
+		filter = sub_realm_owned
+		#ai_target_filter = sub_realm_owned
 		ai_target_filter = primary_title
 
 		from_potential = {
@@ -190,7 +190,7 @@ title_decisions = {
 				completely_controls = ROOT
 
 				custom_tooltip = {
-					text = ir_ttip_one_is_designated
+					text = ir_ttip_designated_in_realm
 					hidden_tooltip = {
 						check_variable = { which = ir_recipient_title_id value = 1 }
 						any_realm_title = {
@@ -209,7 +209,7 @@ title_decisions = {
 				ir_has_duchy_transfer_cost = yes
 			}
 			custom_tooltip = {
-				text = ir_ttip_control_the_current_dejure_duchy
+				text = ir_ttip_control_the_current_dejure_kingdom
 				hidden_tooltip = {
 					ir_title_controlled = yes
 					ir_legally_controls_duchy = yes
@@ -252,13 +252,8 @@ title_decisions = {
 						check_variable = { which = ir_recipient_title_id value = 1 }
 						is_variable_equal = { which = ir_recipient_title_id which = FROM }
 					}
-					custom_tooltip = {
-						text = ir_ttip_transfer
-						hidden_tooltip = {
-							ROOT = {
-								de_jure_liege = PREV
-							}
-						}
+					ROOT = {
+						de_jure_liege = PREV
 					}
 				}
 
@@ -274,7 +269,8 @@ title_decisions = {
 	}
 
 	ir_transfer_kingdom_to_recipient_empire = {
-		filter = realm_owned
+		filter = sub_realm_owned
+		#ai_target_filter = sub_realm_owned
 		ai_target_filter = primary_title
 
 		from_potential = {
@@ -285,15 +281,15 @@ title_decisions = {
 
 		potential = {
 			real_tier = KING
-			ir_title_potential_transfer = yes
 		}
 
 		allow = {
+			ir_title_potential_transfer = yes
 			FROM = {
 				completely_controls = ROOT
 
 				custom_tooltip = {
-					text = ir_ttip_one_is_designated
+					text = ir_ttip_designated_in_realm
 					hidden_tooltip = {
 						check_variable = { which = ir_recipient_title_id value = 1 }
 						any_realm_title = {
@@ -328,13 +324,8 @@ title_decisions = {
 						check_variable = { which = ir_recipient_title_id value = 1 }
 						is_variable_equal = { which = ir_recipient_title_id which = FROM }
 					}
-					custom_tooltip = {
-						text = ir_ttip_transfer
-						hidden_tooltip = {
-							ROOT = {
-								de_jure_liege = PREV
-							}
-						}
+					ROOT = {
+						de_jure_liege = PREV
 					}
 				}
 

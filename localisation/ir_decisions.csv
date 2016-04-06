@@ -1,0 +1,17 @@
+#CODE;ENGLISH;FRENCH;GERMAN;;SPANISH;;;;;;;;;x
+# Decisions
+ir_designate_recipient_title;Designate recipient title;;;;;;;;;;;;;x
+ir_designate_recipient_title_desc;Designate [This.GetFullBaseName] as the recipient for future title transfers.\n;;;;;;;;;;;;;x
+ir_transfer_county_to_recipient_duchy;Transfer County to Recipient;;;;;;;;;;;;;x
+ir_transfer_county_to_recipient_duchy_desc;Transfer [This.GetFullBaseName] to the recipient Duchy.\n;;;;;;;;;;;;;x
+ir_transfer_duchy_to_recipient_kingdom;Transfer Duchy to Recipient;;;;;;;;;;;;;x
+ir_transfer_duchy_to_recipient_kingdom_desc;Transfer [This.GetFullBaseName] to the recipient Kingdom.\n;;;;;;;;;;;;;x
+ir_transfer_kingdom_to_recipient_empire;Transfer Kingdom to Recipient;;;;;;;;;;;;;x
+ir_transfer_kingdom_to_recipient_empire_desc;Transfer [This.GetFullBaseName] to the recipient Empire.\n;;;;;;;;;;;;;x
+# Tooltips
+ir_ttip_not_current_designate;Title is not already designated as recipient;;;;;;;;;;;;;x
+ir_ttip_designated_in_realm;[From.GetBestName] has designated a title in [From.GetHerHis] realm which is not already the de-jure liege of [Root.GetBaseName].;;;;;;;;;;;;;x
+ir_ttip_set_designated_title;Sets the designated recipient title of [From.GetBestName] to [Root.GetFullBaseName];;;;;;;;;;;;;x
+ir_ttip_control_the_current_dejure_duchy;There is no de-jure owner of [Root.GetFullBaseName] not controlled by [From.GetBestName];;;;;;;;;;;;;x
+ir_ttip_control_the_current_dejure_kingdom;There is no de-jure owner of [Root.GetFullBaseName] not controlled by [From.GetBestName];;;;;;;;;;;;;x
+ir_ttip_control_the_current_dejure_empire;There is no de-jure owner of [Root.GetFullBaseName] not controlled by [From.GetBestName];;;;;;;;;;;;;x
