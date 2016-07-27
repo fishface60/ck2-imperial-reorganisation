@@ -3,6 +3,15 @@ Imperial Reorganisation mod
 
 The purpose of this mod is to allow more dynamic transferral of de-jure titles.
 
+The idea, and the balancing mechanism, is based on the De-Jure Adjudication mod,
+but with the custom title creation removed,
+and made safe to use by vassals or in multiplayer.
+
+The AI has not been made aware of how to transfer de-jure titles,
+since it's difficult to even think of when it should be allowed
+let alone the code to make the AI do so,
+but I've found it strangely satisfying to straighten the borders.
+
 If installing directly from version control,
 copy imperial-reorganisation.mod into the CK2 mod folder
 alongside the mod itself.
